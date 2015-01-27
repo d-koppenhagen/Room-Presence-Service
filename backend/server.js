@@ -1,7 +1,7 @@
 // Get packages
-var express = require('express');
+var express    = require('express');
 var bodyParser = require('body-parser');
-
+var gpio       = require('pi-gpio');
 
 var app = express();
 var port = 3000;
@@ -27,25 +27,25 @@ var allowedStates = ["on", "off"];
 var users = {
 	"danny":{
 		"username": "danny",
-		"pin": 17,
+		"pin": 7,
 		"state": "on"
 	},
 	
 	"ferdi":{
 		"username": "ferdi",
-		"pin": 18,
+		"pin": 11,
 		"state": "on"
 	},
 	
 	"dogi":{
 		"username": "dogi",
-		"pin": 19,
+		"pin": 13,
 		"state": "off"
 	},
 	
 	"hannes":{
 		"username": "hannes",
-		"pin": 20,
+		"pin": 15,
 		"state": "off"
 	}
 };
@@ -59,10 +59,22 @@ function setState(username, state){
 
 	if(state == "on"){
 		users[username].state = "on";
+		setGPIO(user[username].pin, 1);
 
 	}else if(state == "off"){
 		users[username].state = "off";
+		setGPIO(user[username].pin, 0);
 	}
+}
+
+
+
+function setGPIO(pin, value){
+	gpio.open(pin, "output", function(err) {        // Open pin for output
+    	gpio.write(pin, value, function() {         // Set pin to value
+        	gpio.close(pin);                        // Close pin
+    	});
+	});
 }
 
 
