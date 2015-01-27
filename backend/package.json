@@ -1,0 +1,8 @@
+{
+	"name": "rpservice",
+	"main": "server.js",
+	"dependencies": {
+		"express": "~4.1.1",
+		"body-parser": "1.10.2"
+	}
+}
