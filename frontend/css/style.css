@@ -1,8 +1,9 @@
-.big-btn{
-    height: 150px;
-    font-size: 3em;
+body{
+    padding-top: 30px;
 }
 
-.help-block-big {
-    height: 100px;
+.big-btn{
+    height: 80px;
+    font-size: 1.7em;
+    margin-top: 20px;
 }

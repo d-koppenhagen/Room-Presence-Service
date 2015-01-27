@@ -2,35 +2,35 @@
 <html lang="de">
 <head>
     <title>WebApp Title</title>
-	<!--  ##############  Meta Tags ############## -->
-    	<meta charset="utf-8">
-    	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-    	<meta name="viewport" content="width=device-width, initial-scale=1">
-    	<!-- used to start like an app with google chrome on android: -->
-    	<meta name="mobile-web-app-capable" content="yes">
-	<!--  ##############  End: Meta Tags ############## -->
+    <!--  ##############  Meta Tags ############## -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- used to start like an app with google chrome on android: -->
+    <meta name="mobile-web-app-capable" content="yes">
+    <!--  ##############  End: Meta Tags ############## -->
 
-	<!--  ##############  Stylesheets ############## -->
-    	<!-- Vendor Stylesheets: -->
-    	<link href="css/bootstrap.min.css" rel="stylesheet" type="text/css" />
-    	<!-- OR CDN: <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css" rel="stylesheet" type="text/css" />-->
+    <!--  ##############  Stylesheets ############## -->
+    <!-- Vendor Stylesheets: -->
+    <link href="css/bootstrap.min.css" rel="stylesheet" type="text/css" />
+    <!-- OR CDN: <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css" rel="stylesheet" type="text/css" />-->
 
-    	<!-- Style -->
-    	<link href="css/style.css" rel="stylesheet" type="text/css" />
-	<!--  ##############  End: Stylesheets ############## -->
+    <!-- Style -->
+    <link href="css/style.css" rel="stylesheet" type="text/css" />
+    <!--  ##############  End: Stylesheets ############## -->
 
-	<!--  ##############  javascript files (Vendor files) ############## -->
-    	<!-- jQuery:  -->
-    	<script src="js/jquery-1.11.1.min.js"></script>
-		<!-- OR CDN: <script src="//code.jquery.com/jquery-1.11.1.min.js"></script> -->
+    <!--  ##############  javascript files (Vendor files) ############## -->
+    <!-- jQuery:  -->
+    <script src="js/jquery-1.11.1.min.js"></script>
+    <!-- OR CDN: <script src="//code.jquery.com/jquery-1.11.1.min.js"></script> -->
 
-    	<!-- Bootstrap js: -->
-    	<script src="js/bootstrap.min.js"></script>
-    	<!-- OR CDN: <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js"></script> -->
+    <!-- Bootstrap js: -->
+    <script src="js/bootstrap.min.js"></script>
+    <!-- OR CDN: <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js"></script> -->
 
-    	<!-- Angular.JS: -->
-    	<!-- OR CDN: <script src="//cdnjs.cloudflare.com/ajax/libs/angular.js/1.3.3/angular.min.js"></script> -->
-	<!--  ##############  End: javascript files (Vendor files) ############## -->
+    <!-- Angular.JS: -->
+    <!-- OR CDN: <script src="//cdnjs.cloudflare.com/ajax/libs/angular.js/1.3.3/angular.min.js"></script> -->
+    <!--  ##############  End: javascript files (Vendor files) ############## -->
 
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -41,23 +41,45 @@
 </head>
 
 <body>
-    <div class="container-fluid">
-        <div class="help-block help-block-big"></div>
-        <div class="row">
-			<div class="col-md-offset-2 col-md-3">
-                <button type="button" class="btn btn-default btn-lg btn-block big-btn" id="btn_dogi">Dogi</button>
+
+    <nav class="navbar navbar-inverse navbar-fixed-top">
+        <div class="container-fluid">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header">
+                <!--
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      -->
+                <a class="navbar-brand" href="#">Presence Service - L0.13</a>
             </div>
-			<div class="col-md-offset-2 col-md-3">
-                <button type="button" class="btn btn-default btn-lg btn-block big-btn" id="btn_hannes">Hannes</button>
+
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
             </div>
+            <!-- /.navbar-collapse -->
         </div>
-        <div class="help-block help-block-big"></div>
-        <div class="row">
-			<div class="col-md-offset-2 col-md-3">
-                <button type="button" class="btn btn-default btn-lg btn-block big-btn" id="btn_danny">Danny</button>
-            </div>
-			<div class="col-md-offset-2 col-md-3">
-                <button type="button" class="btn btn-default btn-lg btn-block big-btn" id="btn_ferdi">Ferdi</button>
+        <!-- /.container-fluid -->
+    </nav>
+
+    <div class="jumbotron">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-3 col-sm-3 col-xs-6">
+                    <button type="button" class="btn btn-default btn-lg btn-block big-btn" id="btn_dogi">Dogi</button>
+                </div>
+                <div class="col-md-3 col-sm-3 col-xs-6">
+                    <button type="button" class="btn btn-default btn-lg btn-block big-btn" id="btn_hannes">Hannes</button>
+                </div>
+                <div class="col-md-3 col-sm-3 col-xs-6">
+                    <button type="button" class="btn btn-default btn-lg btn-block big-btn" id="btn_danny">Danny</button>
+                </div>
+                <div class="col-md-3 col-sm-3 col-xs-6">
+                    <button type="button" class="btn btn-default btn-lg btn-block big-btn" id="btn_ferdi">Ferdi</button>
+                </div>
             </div>
         </div>
     </div>
