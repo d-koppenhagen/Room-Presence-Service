@@ -56,11 +56,11 @@ function setState(username, state){
 	
 	if(state == "on"){
 		users[username].state = "on";
-		setGPIO(user[username].pin, 1);
+		setGPIO(users[username].pin, 1);
 
 	}else if(state == "off"){
 		users[username].state = "off";
-		setGPIO(user[username].pin, 0);
+		setGPIO(users[username].pin, 0);
 	}
 }
 
