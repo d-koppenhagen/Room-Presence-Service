@@ -12,3 +12,11 @@ The frontend has some buttons to change the current state from on to off (not in
 
 ## Watch it!
 [![ScreenShot](http://5.45.102.135:8082/files/83e530ab-05df-455b-b981-c60807220374/preview.png)](http://vimeo.com/117945331)
+
+Special thanks to Theresa and Herbert (and Sabine, Frank, Thorben Hendrik, Janine, Felix, Erna, Erika, Lui)
+
+2015 by
+Ferdinand Malcher,
+Danny Koppenhagen,
+Philipp Dockhorn,
+Johannes Hamfler
