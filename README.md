@@ -7,3 +7,6 @@ There are currently two states (on/off) to turn some LEDs on or off.
 
 The frontend has some buttons to change the current state from on to off (not in the room) and from off to on (available).
 
+## Settings
+* move '/frontend/js/config.example.js' to '/frontend/js/config.js'
+
