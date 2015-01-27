@@ -28,13 +28,13 @@ var users = {
 	"danny":{
 		"username": "danny",
 		"pin": 7,
-		"state": "on"
+		"state": "off"
 	},
 	
 	"ferdi":{
 		"username": "ferdi",
 		"pin": 11,
-		"state": "on"
+		"state": "off"
 	},
 	
 	"dogi":{
@@ -54,9 +54,6 @@ var users = {
 function setState(username, state){
 	console.log('set state for ' + username + ': ' + state);
 	
-	//set in GPIO
-	//TODO...
-
 	if(state == "on"){
 		users[username].state = "on";
 		setGPIO(user[username].pin, 1);
