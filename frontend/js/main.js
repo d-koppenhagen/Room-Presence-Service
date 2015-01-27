@@ -1,4 +1,4 @@
-var rootURL = "http://srv4.malcher-server.de:3000";
+var rootURL = "http://10.12.114.181:3000";
 getStates();
 setInterval("getStates();",5000);
 var currentStates;
