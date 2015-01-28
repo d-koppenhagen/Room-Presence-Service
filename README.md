@@ -11,7 +11,7 @@ The frontend has some buttons to change the current state from on to off (not in
 * move '/frontend/js/config.example.js' to '/frontend/js/config.js'
 
 ## Watch it!
-[![ScreenShot](http://5.45.102.135:8082/files/83e530ab-05df-455b-b981-c60807220374/preview.png)](http://vimeo.com/117945331)
+[![ScreenShot](http://fs1.directupload.net/images/150128/z72srjfp.png)](http://vimeo.com/117945331)
 
 Special thanks to Theresa and Herbert (and Sabine, Frank, Thorben Hendrik, Janine, Felix, Erna, Erika, Lui)
 
