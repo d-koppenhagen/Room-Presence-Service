@@ -1,0 +1,1 @@
+{"danny":{"username":"danny","pin":7,"state":"off"},"ferdi":{"username":"ferdi","pin":11,"state":"off"},"dogi":{"username":"dogi","pin":13,"state":"off"},"hannes":{"username":"hannes","pin":15,"state":"off"}}
