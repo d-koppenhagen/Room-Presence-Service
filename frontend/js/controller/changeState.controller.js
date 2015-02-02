@@ -1,4 +1,14 @@
-var rootURL = "http://10.12.114.181:3000";
+(function(){
+    "use strict";
+	angular
+		.module('presenceService')
+        .controller('changeStateCtrl', ['$scope','$location',
+            function($scope, $http, $location) {
+                console.log('open changeStateCtrl...');
+        }]);
+}());
+
+
 getStates();
 setInterval("getStates();",5000);
 var currentStates;

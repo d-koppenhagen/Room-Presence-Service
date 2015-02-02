@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="de">
+<html ng-app="presenceService" lang="de">
 <head>
     <title>WebApp Title</title>
     <!--  ##############  Meta Tags ############## -->
@@ -13,7 +13,7 @@
     <!--  ##############  Stylesheets ############## -->
     <!-- Vendor Stylesheets: -->
     <link href="css/bootstrap.min.css" rel="stylesheet" type="text/css" />
-    <!-- OR CDN: <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css" rel="stylesheet" type="text/css" />-->
+    <link rel="stylesheet" href="css/jquery.nouislider.min.css">
 
     <!-- Style -->
     <link href="css/style.css" rel="stylesheet" type="text/css" />
@@ -22,10 +22,20 @@
     <!--  ##############  javascript files (Vendor files) ############## -->
     <!-- jQuery:  -->
     <script src="js/jquery-1.11.1.min.js"></script>
-    <!-- OR CDN: <script src="//code.jquery.com/jquery-1.11.1.min.js"></script> -->
-
     <!-- Bootstrap js: -->
     <script src="js/bootstrap.min.js"></script>
+
+    <!-- Angular -->
+    <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.3.6/angular.js"></script>
+    <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.3.6/angular-route.js"></script>
+    <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.3.6/angular-animate.js"></script>
+    <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.3.6/angular-resource.min.js"></script>
+    <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.3.6/angular-aria.js"></script>
+    <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.3.6/angular-sanitize.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/angular-i18n/1.2.15/angular-locale_de-de.js"></script>
+
+    <!-- include jquery nouislider css/js-->
+    <script src="js/jquery.nouislider.all.min.js"></script>
     <!-- OR CDN: <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js"></script> -->
 
     <!-- Angular.JS: -->
@@ -66,7 +76,7 @@
     </nav>
 
     <div class="jumbotron">
-        <div class="container">
+        <div ng-controller="changeStateCtrl" class="container">
             <div class="row">
                 <div class="col-md-3 col-sm-3 col-xs-6">
                     <button type="button" class="btn btn-default btn-lg btn-block big-btn" id="btn_hannes">Hannes</button>
@@ -86,7 +96,8 @@
 
     <!--  ##############  additional javascript files ############## -->
     <script src="js/config.js"></script>
-    <script src="js/main.js"></script>
+    <script src="js/presence.module.js"></script>
+    <script src="js/controller/changeState.controller.js"></script>
     <!--  ##############  End: additional javascript files ############## -->
 </body>
 </html>
