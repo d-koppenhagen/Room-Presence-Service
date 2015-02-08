@@ -1,13 +1,25 @@
-// Get packages
+//include packages
 var express    = require('express');
 var bodyParser = require('body-parser');
 var gpio       = require('pi-gpio');
+var cors       = require('cors');
+var app        = express();
+var api        = express();
+var sw         = require('swagger-node-express');
 
-var app = express();
 var port = 3000;
-var router = express.Router();
+
+
+var models = require("./models.js");
+var stateController = require("./controllers/stateController.js");
+
+
+sw.setAppHandler(api);
 
 app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({
+	extended: true
+}));
 
 
 //CORS middleware
@@ -21,34 +33,30 @@ var allowCrossDomain = function(req, res, next) {
 app.use(allowCrossDomain);
 
 
-var allowedStates = ["on", "off"];
 
 
-var users = {
-	"danny":{
-		"username": "danny",
-		"pin": 7,
-		"state": "off"
-	},
+
+
+sw.addModels(models)
+	.addGet(stateController.getState);
+//	.addPut(stateController.setState)
 	
-	"ferdi":{
-		"username": "ferdi",
-		"pin": 11,
-		"state": "off"
-	},
-	
-	"dogi":{
-		"username": "dogi",
-		"pin": 13,
-		"state": "off"
-	},
-	
-	"hannes":{
-		"username": "hannes",
-		"pin": 15,
-		"state": "off"
-	}
-};
+sw.configureDeclaration("state", {
+	description : "Operations about states",
+	produces: ["application/json"]
+});
+
+
+// set api info
+sw.setApiInfo({
+	title: "Room Presence Service",
+	description: "This is the room presence API for office L0.13 in HfTL, Leipzig, Germany",
+	contact: "mail@ferdinand-malcher.de",
+});
+
+
+
+
 
 
 function setState(username, state){
@@ -79,17 +87,14 @@ function setGPIO(pin, value){
 
 
 
-router.get('/', function(req, res) {
+app.get('/', function(req, res) {
   res.send('This is the L0.13 room presence API');
 });
 
-router.get('/state/get', function(req, res) {
-	res.send(users);	
-});
 
 
 
-router.put('/state/set/:id', function(req, res) {
+api.put('/state/set/:id', function(req, res) {
 	var state = req.body.state;
 	var id = req.params.id;
 	
@@ -105,10 +110,14 @@ router.put('/state/set/:id', function(req, res) {
 
 
 
-// Register all our routes with /api
-app.use('/api', router);
+// Configures the app's base path and api version.
+sw.configureSwaggerPaths("", "/api-docs", "")
+sw.configure("http://10.12.114.183:" + port, "1.0.0");
+
+
+app.use("/api", api);
 
 
 // Start the server
 app.listen(port);
-console.log('Room presence API started on port ' + port);
+console.log("Room presence API started on port " + port);
