@@ -27,14 +27,14 @@ exports.models = {
 			"g": {
 				"type": "integer",
 				"format": "int64",
-				"description": "Red value",
+				"description": "Green value",
 				"minimum": 0,
 				"maximum": 255
 			},
 			"b": {
 				"type": "integer",
 				"format": "int64",
-				"description": "Red value",
+				"description": "Blue value",
 				"minimum": 0,
 				"maximum": 255
 			}
@@ -59,7 +59,7 @@ exports.models = {
 				"description": "GPIO pin for this user"
 			},
 			"state": {
-				"type": "string",
+				"type": "State",
 				"description": "user's state"
 			},
 		}

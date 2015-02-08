@@ -4,7 +4,6 @@ var bodyParser = require('body-parser');
 var gpio       = require('pi-gpio');
 var cors       = require('cors');
 var app        = express();
-var api        = express();
 var sw         = require('swagger-node-express');
 
 var port = 3000;
@@ -14,7 +13,7 @@ var models = require("./models.js");
 var stateController = require("./controllers/stateController.js");
 
 
-sw.setAppHandler(api);
+sw.setAppHandler(app);
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({
@@ -38,8 +37,8 @@ app.use(allowCrossDomain);
 
 
 sw.addModels(models)
-	.addGet(stateController.getState);
-//	.addPut(stateController.setState)
+	.addGet(stateController.getState)     // - /state/get
+	.addGet(stateController.getStateByUserID) // - /state/get/{userID}
 	
 sw.configureDeclaration("state", {
 	description : "Operations about states",
@@ -94,7 +93,7 @@ app.get('/', function(req, res) {
 
 
 
-api.put('/state/set/:id', function(req, res) {
+app.put('/state/set/:id', function(req, res) {
 	var state = req.body.state;
 	var id = req.params.id;
 	
@@ -114,8 +113,6 @@ api.put('/state/set/:id', function(req, res) {
 sw.configureSwaggerPaths("", "/api-docs", "")
 sw.configure("http://10.12.114.183:" + port, "1.0.0");
 
-
-app.use("/api", api);
 
 
 // Start the server
