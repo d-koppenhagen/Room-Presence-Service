@@ -10,7 +10,7 @@ if (( $# < 1 )); then
   exit
 fi
 address="10.12.114.181:3000"
-on=$(echo $(curl -s -X GET -H "Content-Type:application/json" http://$address/api/state/get/) | grep -oP "$1.*?}" | grep -oP 'state.*?}' | grep -oP ':".*?"' | grep -o 'on')
+on=$(echo $(curl -s -X GET -H "Content-Type:application/json" http://$address/api/state/get/) | grep -o "$1.*?}" | grep -o 'state.*?}' | grep -o ':".*?"' | grep -o 'on')
 old="on";  new="off"
 if [ X"$on" == X"" ]; then
   old="off"; new="on"
