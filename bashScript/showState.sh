@@ -10,9 +10,5 @@ if (( $# < 1 )); then
   exit
 fi
 address="10.12.114.181:3000"
-on=$(echo $(curl -s -X GET -H "Content-Type:application/json" http://$address/api/state/get/) | grep -oE "$1.*?}" | grep -oE 'state.*?}' | grep -oE ':".*?"' | grep -o 'on')
-if [ X"$on" == X"" ]; then
-  echo "$1's state is currently off"
-else
-  echo "$1's state is currently on"
-fi
+state=$(echo $(curl -s -X GET -H "Content-Type:application/json" http://$address/api/state/get/) | grep -o "$1[^}]*}" | grep -o 'state[^}]*}' | grep -o ':".*"' | grep -o 'o[^\"]*')
+echo "$1's state is currently $state"
