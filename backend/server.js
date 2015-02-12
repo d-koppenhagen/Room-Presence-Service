@@ -3,8 +3,9 @@ var express    = require('express');
 var bodyParser = require('body-parser');
 var gpio       = require('pi-gpio');
 var cors       = require('cors');
+var url        = require('url');
 var app        = express();
-var sw         = require('swagger-node-express');
+var sw         = require('swagger-node-express').createNew(app);
 
 var port = 3000;
 
@@ -13,23 +14,40 @@ var models = require("./models.js");
 var stateController = require("./controllers/stateController.js");
 
 
-sw.setAppHandler(app);
+
+var corsOptions = {
+  credentials: true,
+  origin: function(origin,callback) {
+    if(origin===undefined) {
+      callback(null,false);
+    } else {
+      // change wordnik.com to your allowed domain.
+      //var match = origin.match("^(.*)?.swagger.io(\:[0-9]+)?");
+      var match = origin.match("^(.*)");
+      var allowed = (match!==null && match.length > 0);
+      callback(null,allowed);
+    }
+  }
+};
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({
 	extended: true
 }));
+app.use(cors(corsOptions));
 
 
 //CORS middleware
-var allowCrossDomain = function(req, res, next) {
+/*var allowCrossDomain = function(req, res, next) {
     res.header('Access-Control-Allow-Origin', '*');
     res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE');
     res.header('Access-Control-Allow-Headers', 'Content-Type');
 
     next();
 }
-app.use(allowCrossDomain);
+app.use(allowCrossDomain);*/
+
+
 
 
 
@@ -86,7 +104,7 @@ function setGPIO(pin, value){
 
 
 
-app.get('/', function(req, res) {
+/*app.get('/', function(req, res) {
   res.send('This is the L0.13 room presence API');
 });
 
@@ -106,7 +124,7 @@ app.put('/state/set/:id', function(req, res) {
 	setState(id, state);
 	res.send();
 });
-
+*/
 
 
 // Configures the app's base path and api version.

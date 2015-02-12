@@ -1,5 +1,6 @@
 var sw = require("swagger-node-express");
 var url = require("url");
+var swp = sw.paramTypes;
 var UserService = require("../UserService.js");
 var swe = sw.errors;
 
@@ -24,24 +25,23 @@ exports.getState = {
 
 exports.getStateByUserID = {
 	"spec": {
-		path: "/state/get/{userID}",
+		path: "/state/get/{userId}",
 		method: "GET",
 		summary: "Get current state of user",
 		notes: "Returns state of the given user",
 		type: "State",
 		nickname: "getStateByUserID",
-		parameters : [sw.pathParam("userID", "ID of user", "string")],
-		responseMessages : [swe.invalid("userID"), swe.notFound("user")]
+		parameters : [swp.path("userId", "ID of user", "string")],
+		responseMessages : [swe.invalid("userId"), swe.notFound("user")]
 	},
 	"action": function(req, res) {
-		if (!req.params.userID){
-			throw swe.invalid("userID");
+		if (!req.params.userId){
+			swe.invalid("userId");
 		}
-		var id = req.params.userID;
-		console.log(id);
-		var state = UserService.getStateByUserID(id);
 
-		if(state) res.send(JSON.stringify(state));
-		else throw swe.notFound("user", res);
+		var state = UserService.getStateByUserID(req.params.userId);
+		
+		if(state) res.send(JSON.stringify(state)); 
+		else swe.notFound("user", res);
 	}
-}
+};

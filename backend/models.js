@@ -19,21 +19,21 @@ exports.models = {
 		"properties": {
 			"r": {
 				"type": "integer",
-				"format": "int64",
+				"format": "int32",
 				"description": "Red value",
 				"minimum": 0,
 				"maximum": 255
 			},
 			"g": {
 				"type": "integer",
-				"format": "int64",
+				"format": "int32",
 				"description": "Green value",
 				"minimum": 0,
 				"maximum": 255
 			},
 			"b": {
 				"type": "integer",
-				"format": "int64",
+				"format": "int32",
 				"description": "Blue value",
 				"minimum": 0,
 				"maximum": 255
@@ -55,7 +55,7 @@ exports.models = {
 			},
 			"pin": {
 				"type": "integer",
-				"format": "int64",
+				"format": "int32",
 				"description": "GPIO pin for this user"
 			},
 			"state": {

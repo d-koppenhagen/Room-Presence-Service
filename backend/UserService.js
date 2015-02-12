@@ -71,9 +71,13 @@ exports.getAllUsers = function(){
 
 
 exports.getStateByUserID = function(id){
-	if(users.hasOwnProperty(id)){	
+	//if(users.hasOwnProperty(id)){	
+	if(users[id]){
 		return users[id].state;
 	}else{
-		return 0;
+		return null;
 	}
 }
+
+
+
