@@ -41,6 +41,28 @@ exports.models = {
 		}
 	},
 	
+	"PinBundle": {
+		"id": "PinBundle",
+		"required": ["r", "g", "b"],
+		"properties": {
+			"r": {
+				"type": "integer",
+				"format": "int32",
+				"description": "GPIO pin for red"
+			},
+			"g": {
+				"type": "integer",
+				"format": "int32",
+				"description": "GPIO pin for green"
+			},
+			"b": {
+				"type": "integer",
+				"format": "int32",
+				"description": "GPIO pin for blue"
+			}
+		}
+	},
+	
 	"User": {
 		"id": "User",
 		"required": ["id", "name", "pin", "state"],
@@ -53,21 +75,10 @@ exports.models = {
 				"type": "string",
 				"description": "full name"
 			},
-			"pinr": {
-				"type": "integer",
-				"format": "int32",
-				"description": "GPIO pin for red LED"
+			"pin": {
+				"type": "PinBundle",
+				"description": "GPIO pins for user's three LEDs (RGB)"
 			},
-			"ping": {
-				"type": "integer",
-				"format": "int32",
-				"description": "GPIO pin for green LED"
-			},
-			"pinb": {
-				"type": "integer",
-				"format": "int32",
-				"description": "GPIO pin for blue LED"
-			},		
 			"state": {
 				"type": "State",
 				"description": "user's state"
