@@ -25,7 +25,6 @@ var corsOptions = {
     if(origin===undefined) {
       callback(null,false);
     } else {
-      // change wordnik.com to your allowed domain.
       //var match = origin.match("^(.*)?.swagger.io(\:[0-9]+)?");
       var match = origin.match("^(.*)");
       var allowed = (match!==null && match.length > 0);
@@ -40,16 +39,6 @@ app.use(bodyParser.urlencoded({
 }));
 app.use(cors(corsOptions));
 
-
-//CORS middleware
-/*var allowCrossDomain = function(req, res, next) {
-    res.header('Access-Control-Allow-Origin', '*');
-    res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE');
-    res.header('Access-Control-Allow-Headers', 'Content-Type');
-
-    next();
-}
-app.use(allowCrossDomain);*/
 
 
 //init PWM
@@ -86,27 +75,11 @@ sw.setApiInfo({
 
 
 
-/*app.get('/', function(req, res) {
+app.get('/', function(req, res) {
   res.send('This is the L0.13 room presence API');
 });
 
 
-
-
-app.put('/state/set/:id', function(req, res) {
-	var state = req.body.state;
-	var id = req.params.id;
-	
-	//error handling
-	if(!state) return res.status(400).send();
-	if(!users[id]) res.status(400).send();
-	if(!(state == "on" || state == "off")) return res.status(400).send();
-
-	//no error, change state
-	setState(id, state);
-	res.send();
-});
-*/
 
 
 // Configures the app's base path and api version.
