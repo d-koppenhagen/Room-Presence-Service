@@ -1,13 +1,17 @@
 //include packages
 var express    = require('express');
 var bodyParser = require('body-parser');
-var gpio       = require('pi-gpio');
 var cors       = require('cors');
 var url        = require('url');
 var app        = express();
 var sw         = require('swagger-node-express').createNew(app);
 
+var UserService = require("./UserService.js");
+var gpio = require('./gpio');
+
 var port = 3000;
+
+
 
 
 var models = require("./models.js");
@@ -48,7 +52,8 @@ app.use(cors(corsOptions));
 app.use(allowCrossDomain);*/
 
 
-
+//init PWM
+gpio.initPwm(UserService.getAllUsers());
 
 
 
@@ -57,6 +62,7 @@ app.use(allowCrossDomain);*/
 sw.addModels(models)
 	.addGet(stateController.getState)     // - /state/get
 	.addGet(stateController.getStateByUserID) // - /state/get/{userID}
+	.addPut(stateController.setStatebyUserID) // - /state/set/{userID}
 	
 sw.configureDeclaration("state", {
 	description : "Operations about states",
@@ -74,30 +80,6 @@ sw.setApiInfo({
 
 
 
-
-
-function setState(username, state){
-	console.log('set state for ' + username + ': ' + state);
-	
-	if(state == "on"){
-		users[username].state = "on";
-		setGPIO(users[username].pin, 1);
-
-	}else if(state == "off"){
-		users[username].state = "off";
-		setGPIO(users[username].pin, 0);
-	}
-}
-
-
-
-function setGPIO(pin, value){
-	gpio.open(pin, "output", function(err) {        // Open pin for output
-    	gpio.write(pin, value, function() {         // Set pin to value
-        	gpio.close(pin);                        // Close pin
-    	});
-	});
-}
 
 
 

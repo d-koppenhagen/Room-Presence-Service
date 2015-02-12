@@ -1,8 +1,14 @@
+var gpio = require('./gpio');
+
 var users = {
 	"danny":{
 		"id": "danny",
 		"name": "Danny",
-		"pin": 7,
+		"pin": {
+			"r": 15,
+			"g": 16,
+			"b": 1
+		},
 		"state": {
 			"state": "off",
 			"color": {
@@ -16,13 +22,17 @@ var users = {
 	"ferdi":{
 		"id": "ferdi",
 		"name": "Ferdi",
-		"pin": 11,
+		"pin": {
+			"r": 6,
+			"g": 10,
+			"b": 11
+		},
 		"state": {
 			"state": "off",
 			"color": {
-				"r": 0,
-				"g": 0,
-				"b": 0
+				"r": 10,
+				"g": 40,
+				"b": 100
 			}
 		}
 	},
@@ -30,7 +40,11 @@ var users = {
 	"dogi":{
 		"id": "dogi",
 		"name": "Dogi",
-		"pin": 13,
+		"pin": {
+			"r": 0,
+			"g": 2,
+			"b": 3
+		},
 		"state": {
 			"state": "off",
 			"color": {
@@ -44,7 +58,11 @@ var users = {
 	"hannes":{
 		"id": "hannes",
 		"name": "Hannes",
-		"pin": 15,
+		"pin": {
+			"r": 12,
+			"g": 13,
+			"b": 14
+		},
 		"state": {
 			"state": "off",
 			"color": {
@@ -55,6 +73,46 @@ var users = {
 		}
 	}
 };
+
+
+
+
+
+
+//predefined states
+var states = {
+	"on": {
+		"r": 255, "g": 255, "b": 255	
+	},
+	"off": {
+		"r": 255, "g": 255, "b": 255	
+	},
+	"red": {
+		"r": 255, "g": 0, "b": 0	
+	},
+	"green": {
+		"r": 0, "g": 255, "b": 0	
+	},
+	"blue": {
+		"r": 0, "g": 0, "b": 255	
+	},
+	"pink": {
+		"r": 255, "g": 0, "b": 255	
+	},
+	"yellow": {
+		"r": 255, "g": 255, "b": 0	
+	},
+	"indigo": {
+		"r": 0, "g": 255, "b": 255	
+	},
+	"custom": {
+		"r": 0, "g": 0, "b": 0	
+	},
+}
+
+
+
+
 
 
 exports.getAllUsers = function(){
@@ -78,6 +136,64 @@ exports.getStateByUserID = function(id){
 		return null;
 	}
 }
+
+
+
+exports.setStateByUserID = function(id, state){
+	//DEBUG
+	console.log('set state for ' + id + ': ' + state.state);
+
+	//unknown user ID
+	if(!users[id]){
+		throw "invaliduser";
+	}
+	
+	//custom state but color is missing
+	if(state.state == "custom" && !state.color){
+		throw "nocolor";
+	}
+	
+	//unkown state
+	if(!states[state.state]){
+		throw "invalidstate"
+	}
+	
+	//////////////////	
+	
+	
+	//overwrite color with predefined value if not custom
+	if(state.state == "custom"){
+		//parse values as integer
+		for(i in state.color){
+			state.color[i] = parseInt(state.color[i]);
+		}	
+	}else{
+		state.color = states[state.state];
+	}
+	
+	
+	//apply new values to user database
+	users[id].state = state;
+	
+	
+	//set color on pins
+	gpio.setColor(state.color, users[id].pin);
+
+	return;
+	
+}
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

@@ -45,3 +45,50 @@ exports.getStateByUserID = {
 		else swe.notFound("user", res);
 	}
 };
+
+
+
+exports.setStatebyUserID = {
+	"spec": {
+		path: "/state/set/{userId}",
+		method: "PUT",
+		summary: "Set new state for user",
+		notes: "Set a new state for a user",
+		type: "State",
+		nickname: "setStateForUserId",
+		parameters : [
+			swp.path("userId", "ID of user", "string"),
+			swp.body("body", "New State object", "State")
+		],
+		responseMessages : [
+			swe.invalid("user"),
+			swe.invalid("input"),
+			swe.notFound("user"),
+			swe.invalid("color for custom state"),
+			swe.invalid("state"),
+			swe.invalid("undefined error")
+		]
+	},
+	"action": function(req, res) {
+	
+		var body = req.body;
+
+		
+		if(typeof body === "undefined" || typeof body.state === "undefined"){
+			swe.invalid("input", res);
+		}
+		
+		try{
+			UserService.setStateByUserID(req.params.userId, body);
+			res.send(JSON.stringify(body));
+		}
+		catch(err){
+			if(err == "invaliduser") swe.notFound("user", res);
+			else if(err == "nocolor") swe.invalid("color for custom state", res);
+			else if(err == "invalidstate") swe.invalid("state", res);
+			else swe.invalid("undefined error", res);
+		}
+	}
+};
+
+

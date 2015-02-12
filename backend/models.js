@@ -53,11 +53,21 @@ exports.models = {
 				"type": "string",
 				"description": "full name"
 			},
-			"pin": {
+			"pinr": {
 				"type": "integer",
 				"format": "int32",
-				"description": "GPIO pin for this user"
+				"description": "GPIO pin for red LED"
 			},
+			"ping": {
+				"type": "integer",
+				"format": "int32",
+				"description": "GPIO pin for green LED"
+			},
+			"pinb": {
+				"type": "integer",
+				"format": "int32",
+				"description": "GPIO pin for blue LED"
+			},		
 			"state": {
 				"type": "State",
 				"description": "user's state"
