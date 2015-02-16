@@ -45,7 +45,7 @@
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
-      <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+      <script src="https://oss.maxcdn.com/3.7.2/.min.js"></script>
       <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
     <![endif]-->
 </head>
@@ -75,16 +75,37 @@
         <!-- /.container-fluid -->
     </nav>
 
-    <div class="jumbotron">
-        <div ng-controller="changeStateCtrl" class="container">
-            <div class="row">
-                <div ng-repeat="person in persons" class="col-md-3 col-sm-3 col-xs-6">
-                    <button ng-click="toggleState(person.username, person.state)" type="button" class="{{person.btnClass}}" id="btn_{{person.username}}">{{person.username | capitalize}}</button>
-                </div>
-            </div>
-        </div>
-    </div>
 
+
+<div ng-controller="changeStateCtrl" class="container">
+  <div class="row">
+    <div ng-repeat="person in persons" class="col-md-3 col-sm-3 col-xs-6">
+      <!-- Split button -->
+      <div class="btn-group" id="btnGrp_{{person.username}}">
+        <button type="button" class="btn btn-default btn-lg  {{person.btnClass}}" ng-click="nextState(person.username, person.state.state)">{{person.name| capitalize}}</button>
+        <button type="button" class="btn btn-default btn-lg  {{person.btnClass}} dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
+          <span class="caret"></span>
+          <span class="sr-only">Toggle Dropdown</span>
+        </button>
+        <ul class="dropdown-menu" role="menu">
+          <li><a ng-click="setNewState(person.username,'off')">Aus (nicht in der HfTL)</a>
+          </li>
+          <li><a ng-click="setNewState(person.username,'red')">Beschäftigt</a>
+          </li>
+          <li><a ng-click="setNewState(person.username,'yellow')">Nicht im Büro</a>
+          </li>
+          <li><a ng-click="setNewState(person.username,'green')">Verfügbar</a>
+          </li>
+          <li><a ng-click="setNewState(person.username,'blue')">Blau (cheers!)</a>
+          </li>
+          <li class="divider"></li>
+          <li><a href="">Benutzerdefiniert...<span class="glyphicon glyphicon-tint pull-right"></span></a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
     <!--  ##############  additional javascript files ############## -->
     <script src="js/config.js"></script>
     <script src="js/presence.module.js"></script>
