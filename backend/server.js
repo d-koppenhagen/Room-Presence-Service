@@ -69,7 +69,7 @@ sw.addValidator(
 
 
 sw.addModels(models)
-	.addGet(stateController.getState)     // - /state/get
+	.addGet(stateController.getState)         // - /state/get
 	.addGet(stateController.getStateByUserID) // - /state/get/{userID}
 	.addPut(stateController.setStatebyUserID) // - /state/set/{userID}
 	

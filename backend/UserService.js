@@ -1,6 +1,43 @@
 var gpio = require('./gpio');
 
 var users = {
+
+	"hannes":{
+		"id": "hannes",
+		"name": "Hannes",
+		"pin": {
+			"r": 12,
+			"g": 13,
+			"b": 14
+		},
+		"state": {
+			"state": "off",
+			"color": {
+				"r": 0,
+				"g": 0,
+				"b": 0
+			}
+		}
+	},
+	
+	"dogi":{
+		"id": "dogi",
+		"name": "Dogi",
+		"pin": {
+			"r": 0,
+			"g": 2,
+			"b": 3
+		},
+		"state": {
+			"state": "off",
+			"color": {
+				"r": 0,
+				"g": 0,
+				"b": 0
+			}
+		}
+	},	
+	
 	"danny":{
 		"id": "danny",
 		"name": "Danny",
@@ -26,42 +63,6 @@ var users = {
 			"r": 6,
 			"g": 10,
 			"b": 11
-		},
-		"state": {
-			"state": "off",
-			"color": {
-				"r": 10,
-				"g": 40,
-				"b": 100
-			}
-		}
-	},
-	
-	"dogi":{
-		"id": "dogi",
-		"name": "Dogi",
-		"pin": {
-			"r": 0,
-			"g": 2,
-			"b": 3
-		},
-		"state": {
-			"state": "off",
-			"color": {
-				"r": 0,
-				"g": 0,
-				"b": 0
-			}
-		}
-	},
-	
-	"hannes":{
-		"id": "hannes",
-		"name": "Hannes",
-		"pin": {
-			"r": 12,
-			"g": 13,
-			"b": 14
 		},
 		"state": {
 			"state": "off",
