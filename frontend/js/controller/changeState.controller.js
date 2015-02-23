@@ -18,6 +18,7 @@
         function getData()  {
             /* getting current data */
             // static for GUI test
+            /*
             var testData = [{
               "id": "danny",
               "name": "Danny",
@@ -84,13 +85,14 @@
               }
             }];
             response(testData);
-            /*
-            $http.get(rootURL+"/api/state/get")
+            */
+
+            $http.get(rootURL+"/state/get")
                 .success(response)
                 .error(function(data, status, headers, config) {
                 console.log("Error by getting data", data, status, headers, config);
             });
-            */
+
             function response(data) {
               console.log("received new data: ", data);
 
@@ -154,11 +156,23 @@
         }
         /* set new state */
         function setState(person, newState) {
-          console.log("setting state to", newState);
+          var r, g, b;
+          if (newState == "custom") {
+            r = $("#red").val();
+            g = $("#green").val();
+            b = $("#blue").val();
+          }
+          console.log("setting state from", person ,"to", newState);
           var obj = {
-            "state": newState
+            "state": newState,
+            "color": {
+              "b":b,
+              "g":g,
+              "r":r
+            }
+
           };
-          $http.put(rootURL + "/api/state/set/" + person, JSON.stringify(obj))
+          $http.put(rootURL + "/state/set/" + person, JSON.stringify(obj))
             .success(success)
             .error(function(data, status, headers, config) {
               console.log("Error by getting data", data, status, headers, config);
@@ -169,13 +183,36 @@
             getData();
           }
         }
+
+        $scope.openModal = function (person){
+          console.log("open modal");
+          $("#customizeStateModal").modal();
+          $scope.choosedPerson = person;
+        }
+
+        $('#colorpicker .sliders').noUiSlider({
+                    start: 127,
+                    connect: "lower",
+                    orientation: "horizontal",
+                    range: {
+                        'min': 0,
+                        'max': 255
+                    },
+                    format: wNumb({
+                        decimals: 0
+                    })
+                });
+
+                // Bind the color changing function
+                // to the slide event.
+
+
+
+
+
+
+
+
       }
     ])
-    .filter('capitalize', function() {
-      return function(input, all) {
-        return (!!input) ? input.replace(/([^\W_]+[^\s-]*) */g, function(txt) {
-          return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();
-        }) : '';
-      }
-    });
 }());
