@@ -1,9 +1,19 @@
 body{
-    padding-top: 30px;
+    padding-top: 70px;
 }
 
-.big-btn{
-    height: 80px;
-    font-size: 1.7em;
-    margin-top: 20px;
+.btn-fixed-100{
+  width: 100px;
+}
+
+
+/* slider */
+.noUi-connect#red{
+    background: rgb(242,66,8);
+}
+.noUi-connect#green{
+    background: rgb(95,169,26);
+}
+.noUi-connect#blue{
+    background: rgb(44,72,228);
 }

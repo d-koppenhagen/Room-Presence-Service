@@ -1,35 +1,28 @@
 #!/bin/bash
-# getting results from REST API
-curl -s -o currentStates.txt -X GET -H "Content-Type:application/json" http://10.12.114.181:3000/api/state/get/
-
-# check which name is posted
-if [ "$1" == "danny" ]
-then
-	currentState=$(cat currentStates.txt | jsawk 'return this.danny.state');
+# check if params are available
+if (( $# < 1 )); then
+  echo "Skript toggles the current state of presence."; echo ""
+  echo "Usage:"
+  echo "    ./toggleState <name> [<address>]"
+  echo "Examples:"
+  echo "    ./toggleState dogi"
+  echo "    ./toggleState dogi 10.12.114.181:3000"
+  exit
 fi
-if [ $1 == "dogi" ]
-then
-        currentState=$(cat currentStates.txt | jsawk 'return this.dogi.state');
+# set address or read it from param
+address="10.12.114.181:3000"
+if [ X"$2" != X"" ]; then
+  two=$(echo $2 | grep -oE "([0-9]{1,3}\.){,3}([0-9]{1,3}):[0-9]{1,5}")
+  echo $two
+  if [ X"" != "$two" ]; then
+    address="$2"
+  fi
 fi
-if [ $1 == "hannes" ]
-then
-        currentState=$(cat currentStates.txt | jsawk 'return this.hannes.state');
+# get state of user set in param
+state=$(echo $(curl -s -X GET -H "Content-Type:application/json" http://$address/api/state/get/) | grep -o "$1[^}]*}" | grep -o 'state[^}]*}' | grep -o ':".*"' | grep -o 'o[^\"]*')
+new="off"
+if [ X"$state" == X"off" ]; then
+  new="on"
 fi
-if [ $1 == "ferdi" ]
-then
-        currentState=$(cat currentStates.txt | jsawk 'return this.ferdi.state');
-fi
-
-# check the current state
-if [ $currentState == "on" ]
-then
-	newState="off";
-	curl -X PUT -d '{"state":"off"}' -H "Content-Type:application/json" "http://10.12.114.181:3000/api/state/set/$1"
-fi
-if [ $currentState == "off" ]
-then
-	newState="on";
-	curl -X PUT -d '{"state":"on"}' -H "Content-Type:application/json" "http://10.12.114.181:3000/api/state/set/$1"
-fi
-
-echo "$1's state from '$currentState' to '$newState'"
+curl -X PUT -d "{\"state\":\"$new\"}" -H "Content-Type:application/json" "http://$address/api/state/set/$1"
+echo "$1's state from '$state' to '$new'"
