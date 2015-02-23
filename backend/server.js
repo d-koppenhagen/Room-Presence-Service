@@ -5,6 +5,7 @@ var cors       = require('cors');
 var url        = require('url');
 var app        = express();
 var sw         = require('swagger-node-express').createNew(app);
+var config     = require('./config');
 
 var UserService = require("./UserService.js");
 var gpio = require('./gpio');
@@ -43,6 +44,25 @@ app.use(cors(corsOptions));
 
 //init PWM
 gpio.initPwm(UserService.getAllUsers());
+
+
+
+
+//API key needed
+sw.addValidator(
+	function validate(req, path){
+		var apiKey = req.headers["api_key"];
+		if(!apiKey){
+        	apiKey = url.parse(req.url,true).query["api_key"];
+		}
+		
+		if(apiKey == config.apikey) {
+			return true; 
+		}
+		
+		return false;
+	}
+);
 
 
 
