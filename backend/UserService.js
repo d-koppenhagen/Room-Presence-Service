@@ -6,9 +6,9 @@ var users = {
 		"id": "hannes",
 		"name": "Hannes",
 		"pin": {
-			"r": 12,
-			"g": 13,
-			"b": 14
+			"r": 6,
+			"g": 10,
+			"b": 11
 		},
 		"state": {
 			"state": "off",
@@ -24,9 +24,9 @@ var users = {
 		"id": "dogi",
 		"name": "Dogi",
 		"pin": {
-			"r": 0,
-			"g": 2,
-			"b": 3
+			"r": 15,
+			"g": 16,
+			"b": 1
 		},
 		"state": {
 			"state": "off",
@@ -42,9 +42,9 @@ var users = {
 		"id": "danny",
 		"name": "Danny",
 		"pin": {
-			"r": 15,
-			"g": 16,
-			"b": 1
+			"r": 12,
+			"g": 13,
+			"b": 14
 		},
 		"state": {
 			"state": "off",
@@ -60,9 +60,9 @@ var users = {
 		"id": "ferdi",
 		"name": "Ferdi",
 		"pin": {
-			"r": 6,
-			"g": 10,
-			"b": 11
+			"r": 0,
+			"g": 2,
+			"b": 3
 		},
 		"state": {
 			"state": "off",
@@ -92,19 +92,19 @@ var states = {
 		"r": 255, "g": 0, "b": 0	
 	},
 	"green": {
-		"r": 0, "g": 255, "b": 0	
+		"r": 127, "g": 255, "b": 0	
 	},
 	"blue": {
 		"r": 0, "g": 0, "b": 255	
 	},
+	"brightblue": {
+		"r": 0, "g": 168, "b": 179	
+	},
 	"pink": {
-		"r": 255, "g": 0, "b": 255	
+		"r": 255, "g": 0, "b": 61	
 	},
 	"yellow": {
-		"r": 255, "g": 255, "b": 0	
-	},
-	"indigo": {
-		"r": 0, "g": 255, "b": 255	
+		"r": 255, "g": 55, "b": 0	
 	},
 	"custom": {
 		"r": 0, "g": 0, "b": 0	
