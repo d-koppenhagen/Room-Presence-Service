@@ -96,12 +96,12 @@ sw.setApiInfo({
 
 
 app.get('/', function(req, res) {
-  res.send('This is the L0.13 room presence API');
+	res.send('This is the L0.13 room presence API');
 });
 
 
 //Serve out swagger-ui
-app.use('/docs', express.static('./swagger-ui/dist'));
+app.use('/docs', express.static(__dirname + '/swagger-ui/dist'));
 
 
 
