@@ -1,9 +1,7 @@
 body{
-    padding-top: 30px;
+    padding-top: 70px;
 }
 
-.big-btn{
-    height: 80px;
-    font-size: 1.7em;
-    margin-top: 20px;
+.btn-fixed-100{
+  width: 100px;
 }

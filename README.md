@@ -13,7 +13,7 @@ The frontend has some buttons to change the current state from on to off (not in
 ## Watch it!
 [![ScreenShot](http://fs1.directupload.net/images/150128/z72srjfp.png)](http://vimeo.com/117945331)
 
-Special thanks to Theresa and Herbert (and Sabine, Frank, Thorben Hendrik, Janine, Felix, Erna, Erika, Lui)
+Special thanks to Theresa and Herbert (and Sabine, Frank, Thorben Hendrik, Janine, Felix, Erna, Erika, Lui, VentilaTina)
 
 2015 by
 Ferdinand Malcher,

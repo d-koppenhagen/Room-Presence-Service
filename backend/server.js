@@ -1,114 +1,116 @@
-// Get packages
+//include packages
 var express    = require('express');
 var bodyParser = require('body-parser');
-var gpio       = require('pi-gpio');
+var cors       = require('cors');
+var url        = require('url');
+var app        = express();
+var sw         = require('swagger-node-express').createNew(app);
+var config     = require('./config');
 
-var app = express();
+var UserService = require("./UserService.js");
+var gpio = require('./gpio');
+
 var port = 3000;
-var router = express.Router();
-
-app.use(bodyParser.json());
 
 
-//CORS middleware
-var allowCrossDomain = function(req, res, next) {
-    res.header('Access-Control-Allow-Origin', '*');
-    res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE');
-    res.header('Access-Control-Allow-Headers', 'Content-Type');
-
-    next();
-}
-app.use(allowCrossDomain);
 
 
-var allowedStates = ["on", "off"];
+var models = require("./models.js");
+var stateController = require("./controllers/stateController.js");
 
 
-var users = {
-	"danny":{
-		"username": "danny",
-		"pin": 7,
-		"state": "off"
-	},
-	
-	"ferdi":{
-		"username": "ferdi",
-		"pin": 11,
-		"state": "off"
-	},
-	
-	"dogi":{
-		"username": "dogi",
-		"pin": 13,
-		"state": "off"
-	},
-	
-	"hannes":{
-		"username": "hannes",
-		"pin": 15,
-		"state": "off"
-	}
+
+var corsOptions = {
+  credentials: true,
+  origin: function(origin,callback) {
+    if(origin===undefined) {
+      callback(null,false);
+    } else {
+      //var match = origin.match("^(.*)?.swagger.io(\:[0-9]+)?");
+      var match = origin.match("^(.*)");
+      var allowed = (match!==null && match.length > 0);
+      callback(null,allowed);
+    }
+  }
 };
 
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({
+	extended: true
+}));
+app.use(cors(corsOptions));
 
-function setState(username, state){
-	console.log('set state for ' + username + ': ' + state);
-	
-	if(state == "on"){
-		users[username].state = "on";
-		setGPIO(users[username].pin, 1);
 
-	}else if(state == "off"){
-		users[username].state = "off";
-		setGPIO(users[username].pin, 0);
+
+//init PWM
+gpio.initPwm(UserService.getAllUsers());
+
+
+
+
+//API key needed
+sw.addValidator(
+	function validate(req, path){
+		var apiKey = req.headers["api_key"];
+		if(!apiKey){
+        	apiKey = url.parse(req.url,true).query["api_key"];
+		}
+		
+		if(apiKey == config.apikey) {
+			return true; 
+		}
+		
+		return false;
 	}
-}
-
-
-
-function setGPIO(pin, value){
-	gpio.open(pin, "output", function(err) {        // Open pin for output
-    	gpio.write(pin, value, function() {         // Set pin to value
-        	gpio.close(pin);                        // Close pin
-    	});
-	});
-}
+);
 
 
 
 
 
-
-router.get('/', function(req, res) {
-  res.send('This is the L0.13 room presence API');
-});
-
-router.get('/state/get', function(req, res) {
-	res.send(users);	
-});
-
-
-
-router.put('/state/set/:id', function(req, res) {
-	var state = req.body.state;
-	var id = req.params.id;
+sw.addModels(models)
+	.addGet(stateController.getState)         // - /state/get
+	.addGet(stateController.getStateByUserID) // - /state/get/{userID}
+	.addPut(stateController.setStatebyUserID) // - /state/set/{userID}
 	
-	//error handling
-	if(!state) return res.status(400).send();
-	if(!users[id]) res.status(400).send();
-	if(!(state == "on" || state == "off")) return res.status(400).send();
+sw.configureDeclaration("state", {
+	description : "Operations about states",
+	produces: ["application/json"]
+});
 
-	//no error, change state
-	setState(id, state);
-	res.send();
+
+// set api info
+sw.setApiInfo({
+	title: "Room Presence Service",
+	description: "This is the room presence API for office L0.13 in HfTL, Leipzig, Germany",
+	contact: "mail@ferdinand-malcher.de",
 });
 
 
 
-// Register all our routes with /api
-app.use('/api', router);
+
+
+
+
+
+
+
+app.get('/', function(req, res) {
+	res.send('This is the L0.13 room presence API');
+});
+
+
+//Serve out swagger-ui
+app.use('/docs', express.static(__dirname + '/swagger-ui/dist'));
+
+
+
+// Configures the app's base path and api version.
+sw.configureSwaggerPaths("", "/api-docs", "")
+sw.configure("http://10.12.114.183:" + port, "1.0.0");
+
 
 
 // Start the server
 app.listen(port);
-console.log('Room presence API started on port ' + port);
+console.log("Room presence API started on port " + port);
