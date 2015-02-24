@@ -79,25 +79,25 @@
   <div ng-controller="changeStateCtrl" class="container">
     <div class="row">
       <div ng-repeat="person in persons" class="col-md-6 col-xs-12">
-        <button type="button" class="btn btn-default btn-fixed-100  {{person.btnClass}}" ng-click="nextState(person.id, person.state.state)">{{person.name}}</button>
+        <button type="button" class="btn btn-default btn-lg btn-fixed-130  {{person.btnClass}}" ng-click="nextState(person.id, person.state.state)">{{person.name}}</button>
         <!-- Split button -->
         <div class="btn-group" id="btnGrp_{{person.id}}">
-          <button type="button" class="btn btn-default  btn-success" ng-click="setNewState(person.id,'green')">
+          <button type="button" class="btn btn-default btn-lg  btn-success" ng-click="setNewState(person.id,'green')">
             <span class="glyphicon glyphicon-check"></span>
           </button>
-          <button type="button" class="btn btn-default  btn-warning" ng-click="setNewState(person.id,'yellow')">
+          <button type="button" class="btn btn-default btn-lg  btn-warning" ng-click="setNewState(person.id,'yellow')">
             <span class="glyphicon glyphicon-log-out"></span>
           </button>
-          <button type="button" class="btn btn-default  btn-danger" ng-click="setNewState(person.id,'red')">
+          <button type="button" class="btn btn-default btn-lg  btn-danger" ng-click="setNewState(person.id,'red')">
             <span class="glyphicon glyphicon-volume-off"></span>
           </button>
-          <button type="button" class="btn btn-default  btn-info" ng-click="setNewState(person.id,'blue')">
+          <button type="button" class="btn btn-default btn-lg  btn-info" ng-click="setNewState(person.id,'blue')">
             <span class="glyphicon glyphicon-glass"></span>
           </button>
-          <button type="button" class="btn btn-default  btn-primary" ng-click="openModal(person.id)">
+          <button type="button" class="btn btn-default btn-lg  btn-primary" ng-click="openModal(person.id)">
             <span class="glyphicon glyphicon-wrench"></span>
           </button>
-          <button type="button" class="btn btn-default  btn-default" ng-click="setNewState(person.id,'off')">
+          <button type="button" class="btn btn-default btn-lg  btn-default" ng-click="setNewState(person.id,'off')">
             <span class="glyphicon glyphicon-off"></span>
           </button>
         </div>
