@@ -69,7 +69,7 @@ sw.addValidator(
 
 
 sw.addModels(models)
-	.addGet(stateController.getState)     // - /state/get
+	.addGet(stateController.getState)         // - /state/get
 	.addGet(stateController.getStateByUserID) // - /state/get/{userID}
 	.addPut(stateController.setStatebyUserID) // - /state/set/{userID}
 	
@@ -96,9 +96,12 @@ sw.setApiInfo({
 
 
 app.get('/', function(req, res) {
-  res.send('This is the L0.13 room presence API');
+	res.send('This is the L0.13 room presence API');
 });
 
+
+//Serve out swagger-ui
+app.use('/docs', express.static(__dirname + '/swagger-ui/dist'));
 
 
 
