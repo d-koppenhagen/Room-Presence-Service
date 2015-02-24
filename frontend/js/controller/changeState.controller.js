@@ -158,10 +158,15 @@
         function setState(person, newState) {
           var r, g, b;
           if (newState == "custom") {
-            r = $("#red").val();
-            g = $("#green").val();
-            b = $("#blue").val();
+            var customRGBvalue = hexToRgb( $("#color").val() );
+            console.log("custom color: ", customRGBvalue);
+            r = customRGBvalue.r
+            g = customRGBvalue.g
+            b = customRGBvalue.b
           }
+
+
+
           console.log("setting state from", person, "to", newState);
           var obj = {
             "state": newState,
@@ -190,28 +195,18 @@
           $scope.choosedPerson = person;
         }
 
-        $('#colorpicker .sliders').noUiSlider({
-          start: 127,
-          connect: "lower",
-          orientation: "horizontal",
-          range: {
-            'min': 0,
-            'max': 255
-          },
-          format: wNumb({
-            decimals: 0
-          })
-        });
-
-        // Bind the color changing function
-        // to the slide event.
+        $('#colorpicker').farbtastic('#color');
 
 
 
-
-
-
-
+        function hexToRgb(hex) {
+          var result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
+          return result ? {
+              r: parseInt(result[1], 16),
+              g: parseInt(result[2], 16),
+              b: parseInt(result[3], 16)
+          } : null;
+        }
 
       }
     ])
