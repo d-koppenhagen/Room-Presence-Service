@@ -24,12 +24,12 @@ fi
 if [[ "$currentState" == '"on"' ]]
 then
         newState="off";
-        curl -X PUT -d '{"state":"off"}' -H "Content-Type:application/json" "http://10.12.114.181:3000/api/state/set/$1"
+        curl -X PUT -d '{"state":"off"}' -H "Content-Type:application/json" "http://10.12.114.181:3000/api/state/set/$1\?api_key\=$apikey"
 fi
 if [[ "$currentState" == '"off"' ]]
 then
         newState="on";
-        curl -X PUT -d '{"state":"on"}' -H "Content-Type:application/json" "http://10.12.114.181:3000/api/state/set/$1"
+        curl -X PUT -d '{"state":"on"}' -H "Content-Type:application/json" "http://10.12.114.181:3000/api/state/set/$1\?api_key\=$apikey"
 fi
 
 echo "$1's state from '$currentState' to '$newState'"
