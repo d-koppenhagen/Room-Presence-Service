@@ -2,13 +2,14 @@
 <html ng-app="presenceService" lang="de">
 
 <head>
-  <title>WebApp Title</title>
+  <title>Presence Service 2.0</title>
   <!--  ##############  Meta Tags ############## -->
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <!-- used to start like an app with google chrome on android: -->
-  <meta name="mobile-web-app-capable" content="yes">
+  <!-- used to start like an app with Android and ios devices -->
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   <!--  ##############  End: Meta Tags ############## -->
 
   <!--  ##############  Stylesheets ############## -->
@@ -81,23 +82,23 @@
         <button type="button" class="btn btn-default btn-fixed-100  {{person.btnClass}}" ng-click="nextState(person.id, person.state.state)">{{person.name}}</button>
         <!-- Split button -->
         <div class="btn-group" id="btnGrp_{{person.id}}">
-          <button type="button" class="btn btn-default  btn-default" ng-click="setNewState(person.id,'off')">
-            <span class="glyphicon glyphicon-off"></span>
-          </button>
-          <button type="button" class="btn btn-default  btn-danger" ng-click="setNewState(person.id,'red')">
-            <span class="glyphicon glyphicon-volume-off"></span>
+          <button type="button" class="btn btn-default  btn-success" ng-click="setNewState(person.id,'green')">
+            <span class="glyphicon glyphicon-check"></span>
           </button>
           <button type="button" class="btn btn-default  btn-warning" ng-click="setNewState(person.id,'yellow')">
             <span class="glyphicon glyphicon-log-out"></span>
           </button>
-          <button type="button" class="btn btn-default  btn-success" ng-click="setNewState(person.id,'green')">
-            <span class="glyphicon glyphicon-check"></span>
+          <button type="button" class="btn btn-default  btn-danger" ng-click="setNewState(person.id,'red')">
+            <span class="glyphicon glyphicon-volume-off"></span>
           </button>
           <button type="button" class="btn btn-default  btn-info" ng-click="setNewState(person.id,'blue')">
             <span class="glyphicon glyphicon-glass"></span>
           </button>
           <button type="button" class="btn btn-default  btn-primary" ng-click="openModal(person.id)">
             <span class="glyphicon glyphicon-wrench"></span>
+          </button>
+          <button type="button" class="btn btn-default  btn-default" ng-click="setNewState(person.id,'off')">
+            <span class="glyphicon glyphicon-off"></span>
           </button>
         </div>
         <span class="help-block"></span>
