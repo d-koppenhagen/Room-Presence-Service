@@ -100,6 +100,9 @@ app.get('/', function(req, res) {
 });
 
 
+//Serve out swagger-ui
+app.use('/docs', express.static('./swagger-ui/dist'));
+
 
 
 // Configures the app's base path and api version.
