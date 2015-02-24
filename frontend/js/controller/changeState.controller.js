@@ -2,8 +2,8 @@
   "use strict";
   angular
     .module('presenceService')
-    .controller('changeStateCtrl', ['$scope', '$http', '$location',
-      function($scope, $http, $location) {
+    .controller('changeStateCtrl', ['$scope', '$http', '$location','$interval',
+      function($scope, $http, $location, $interval) {
         console.log('open changeStateCtrl...');
 
         var strBtnOff = "btn-default";
@@ -14,79 +14,9 @@
         var strBtnCustom = "btn-info";
 
         getData();
+        $interval(getData,2000);
 
         function getData()  {
-          /* getting current data */
-          // static for GUI test
-          /*
-          var testData = [{
-            "id": "danny",
-            "name": "Danny",
-            "pin": {
-              "r": 15,
-              "g": 16,
-              "b": 1
-            },
-            "state": {
-              "state": "green",
-              "color": {
-                "r": 0,
-                "g": 0,
-                "b": 0
-              }
-            }
-          }, {
-            "id": "ferdi",
-            "name": "Ferdi",
-            "pin": {
-              "r": 6,
-              "g": 10,
-              "b": 11
-            },
-            "state": {
-              "state": "yellow",
-              "color": {
-                "r": 10,
-                "g": 40,
-                "b": 100
-              }
-            }
-          }, {
-            "id": "dogi",
-            "name": "Dogi",
-            "pin": {
-              "r": 0,
-              "g": 2,
-              "b": 3
-            },
-            "state": {
-              "state": "custom",
-              "color": {
-                "r": 0,
-                "g": 0,
-                "b": 0
-              }
-            }
-          }, {
-            "id": "hannes",
-            "name": "Hannes",
-            "pin": {
-              "r": 12,
-              "g": 13,
-              "b": 14
-            },
-            "state": {
-              "state": "blue",
-              "color": {
-                "r": 0,
-                "g": 0,
-                "b": 0
-              }
-            }
-          }];
-          response(testData);
-          */
-
           $http.get(rootURL + "/state/get?api_key=" + apikey)
             .success(response)
             .error(function(data, status, headers, config) {
