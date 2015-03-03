@@ -22,8 +22,8 @@ fi
 state=$(curl -s -X GET -H "Content-Type:application/json" $address/state/get\?api_key\=hGzftDrTxckj6745vuDgT | sed -e 's/[{}]/''/g' | awk '{n=split($0,a,","); for (i=1; i<=n; i++) print a[i]}' | grep $1 -A 8 | grep -e ":\"state.*" |grep custom)
 if [ X"$state" != "" ]; then # not a custom state?
   # print color
-  curl -s -X GET -H "Content-Type:application/json" $address/state/get\?api_key\=hGzftDrTxckj6745vuDgT | sed -e 's/[{}]/''/g' | awk '{n=split($0,a,","); for (i=1; i<=n; i++) print a[i]}' | grep $1 -A 8 | grep -e ":\"state.*" -o | grep '":".*' -o | grep "\w*" -o
+  curl -s -X GET -H "Content-Type:application/json" $address/state/get\?api_key\=hGzftDrTxckj6745vuDgT | sed -e 's/[{}]/''/g' | awk '{n=split($0,a,","); for (i=1; i<=n; i++) print a[i]}' | grep $1 -A 8 | grep -e ":\"state.*" -o | grep '":".*' -o | grep '\w[^"]*' -o
 else
   # print rgb-values
-  curl -s -X GET -H "Content-Type:application/json" $address/state/get\?api_key\=hGzftDrTxckj6745vuDgT | sed -e 's/[{}]/''/g' | awk '{n=split($0,a,","); for (i=1; i<=n; i++) print a[i]}' | grep $1 -A 8 | grep color -A 4 | grep '"\w".*' -o
+  curl -s -X GET -H "Content-Type:application/json" $address/state/get\?api_key\=hGzftDrTxckj6745vuDgT | sed -e 's/[{}]/''/g' | awk '{n=split($0,a,","); for (i=1; i<=n; i++) print a[i]}' | grep $1 -A 8 | grep color -A 4 | grep '\w[^"]*' -o
 fi
