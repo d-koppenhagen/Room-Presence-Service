@@ -1,1 +1,0 @@
-exports.apikey = "apikey";
